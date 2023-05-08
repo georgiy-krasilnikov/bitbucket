@@ -35,60 +35,24 @@ func RunBot() error {
 	keyboard := NewKeyboard()
 
 	for upd := range updates {
-		if upd.Message == nil {
+		if upd.Message == nil && upd.CallbackQuery != nil {
+			msg := tg.NewMessage(upd.CallbackQuery.Message.Chat.ID, upd.CallbackQuery.Data)
+			_, err := bot.Send(msg)
+			if err != nil {
+				log.Fatalf("failed to send 'button' msg: %s", err.Error())
+			}
+			
 			continue
 		}
 
-		if upd.Message.Text != "" {
+		if upd.Message != nil {
 			switch upd.Message.Text {
 			case "/start":
-				msg := tg.NewMessage(upd.Message.Chat.ID, "Привет! 😄\nЯ телеграм-бот, созданный для тестового задания!")
+				msg := tg.NewMessage(upd.Message.Chat.ID, "Привет! 😄\nЯ телеграм-бот, созданный для тестового задания!\nПопробуй нажать на кнопки:)")
 				msg.ReplyMarkup = keyboard
 				_, err := bot.Send(msg)
 				if err != nil {
 					return fmt.Errorf("failed to send 'start' msg: %w", err)
-				}
-
-			case keyboard.Keyboard[0][0].Text:
-				msg := tg.NewMessage(upd.Message.Chat.ID, "Это 1 кнопка:)")
-				_, err := bot.Send(msg)
-				if err != nil {
-					log.Fatalf("failed to send '1 button' msg: %s", err.Error())
-				}
-
-			case keyboard.Keyboard[0][1].Text:
-				msg := tg.NewMessage(upd.Message.Chat.ID, "Это 2 кнопка:)")
-				_, err := bot.Send(msg)
-				if err != nil {
-					log.Fatalf("failed to send '2 button' msg: %s", err.Error())
-				}
-
-			case keyboard.Keyboard[0][2].Text:
-				msg := tg.NewMessage(upd.Message.Chat.ID, "Это 3 кнопка:)")
-				_, err := bot.Send(msg)
-				if err != nil {
-					log.Fatalf("failed to send '3 button' msg: %s", err.Error())
-				}
-
-			case keyboard.Keyboard[0][3].Text:
-				msg := tg.NewMessage(upd.Message.Chat.ID, "Это 4 кнопка:)")
-				_, err := bot.Send(msg)
-				if err != nil {
-					log.Fatalf("failed to send '4 button' msg: %s", err.Error())
-				}
-
-			case keyboard.Keyboard[1][0].Text:
-				msg := tg.NewMessage(upd.Message.Chat.ID, "Это 5 кнопка:)")
-				_, err := bot.Send(msg)
-				if err != nil {
-					log.Fatalf("failed to send '5 button' msg: %s", err.Error())
-				}
-
-			case keyboard.Keyboard[1][1].Text:
-				msg := tg.NewMessage(upd.Message.Chat.ID, "Это 6 кнопка:)")
-				_, err := bot.Send(msg)
-				if err != nil {
-					log.Fatalf("failed to send '6 button' msg: %s", err.Error())
 				}
 
 			default:

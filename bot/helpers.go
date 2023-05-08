@@ -4,17 +4,17 @@ import (
 	tg "github.com/Syfaro/telegram-bot-api"
 )
 
-func NewKeyboard() tg.ReplyKeyboardMarkup {
-	return tg.NewReplyKeyboard(
-		tg.NewKeyboardButtonRow(
-			tg.NewKeyboardButton("1️⃣"),
-			tg.NewKeyboardButton("2️⃣"),
-			tg.NewKeyboardButton("3️⃣"),
-			tg.NewKeyboardButton("4️⃣"),
+func NewKeyboard() tg.InlineKeyboardMarkup {
+	return tg.NewInlineKeyboardMarkup(
+		tg.NewInlineKeyboardRow(
+			tg.NewInlineKeyboardButtonData("1️⃣", "1 кнопка:)"),
+			tg.NewInlineKeyboardButtonData("2️⃣", "2 кнопка:)"),
+			tg.NewInlineKeyboardButtonData("3️⃣", "3 кнопка:)"),
+			tg.NewInlineKeyboardButtonData("4️⃣", "4 кнопка:)"),
 		),
-		tg.NewKeyboardButtonRow(
-			tg.NewKeyboardButton("5️⃣"),
-			tg.NewKeyboardButton("6️⃣"),
+		tg.NewInlineKeyboardRow(
+			tg.NewInlineKeyboardButtonData("5️⃣", "5 кнопка:)"),
+			tg.NewInlineKeyboardButtonData("6️⃣", "6 кнопка:)"),
 		),
 	)
 }
