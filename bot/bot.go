@@ -42,7 +42,7 @@ func RunBot() error {
 		if upd.Message.Text != "" {
 			switch upd.Message.Text {
 			case "/start":
-				msg := tg.NewMessage(upd.Message.Chat.ID, "Привет! 😄\n Я телеграм-бот, созданный для тестового задания!")
+				msg := tg.NewMessage(upd.Message.Chat.ID, "Привет! 😄\nЯ телеграм-бот, созданный для тестового задания!")
 				msg.ReplyMarkup = keyboard
 				_, err := bot.Send(msg)
 				if err != nil {
@@ -100,6 +100,5 @@ func RunBot() error {
 			}
 		}
 	}
-
 	return nil
 }
