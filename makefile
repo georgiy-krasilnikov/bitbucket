@@ -1,0 +1,2 @@
+up:
+	go run *.go
