@@ -4,17 +4,23 @@ import (
 	tg "github.com/Syfaro/telegram-bot-api"
 )
 
-func NewKeyboard() tg.InlineKeyboardMarkup {
+func NewKeyboard(choice string) tg.InlineKeyboardMarkup {
+	var name1, name2, url1, url2 string
+	switch choice {
+	case "Парк развлечений":
+		name1, url1, name2, url2 = "Сочи Парк", "https://www.sochipark.ru/", "SkyPark", "https://skypark.ru/"
+	case "Боулинг":
+		name1, url1, name2, url2 = "Торо", "torobowling-sochi.ru", "Хали-гали", "haligalisochi.ru"
+	case "Кинотеатр":
+		name1, url1, name2, url2 = "City Stars", "https://kinomonitor.ru/cinemas/city-stars/", "Кинотеатр Сочи", "sochi-sputnik.ru"
+	case "Кафе":
+		name1, url1, name2, url2 = "Мидийное место", "midiynoe-mesto.ru", "Дельфин и Русалка", "delfinrusalka.ru"
+	}
+
 	return tg.NewInlineKeyboardMarkup(
 		tg.NewInlineKeyboardRow(
-			tg.NewInlineKeyboardButtonData("1️⃣", "1 кнопка:)"),
-			tg.NewInlineKeyboardButtonData("2️⃣", "2 кнопка:)"),
-			tg.NewInlineKeyboardButtonData("3️⃣", "3 кнопка:)"),
-			tg.NewInlineKeyboardButtonData("4️⃣", "4 кнопка:)"),
-		),
-		tg.NewInlineKeyboardRow(
-			tg.NewInlineKeyboardButtonData("5️⃣", "5 кнопка:)"),
-			tg.NewInlineKeyboardButtonData("6️⃣", "6 кнопка:)"),
+			tg.NewInlineKeyboardButtonURL(name1, url1),
+			tg.NewInlineKeyboardButtonURL(name2, url2),
 		),
 	)
 }
