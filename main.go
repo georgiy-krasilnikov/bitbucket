@@ -4,16 +4,8 @@ import (
 	"log"
 	"os"
 
-	env "github.com/joho/godotenv"
-
 	bot "tg_bot/bot"
 )
-
-func init() {
-	if err := env.Load(); err != nil {
-		log.Fatalf("no .env file found: %s", err.Error())
-	}
-}
 
 func main() {
 	botToken := os.Getenv("BOT_TOKEN")
